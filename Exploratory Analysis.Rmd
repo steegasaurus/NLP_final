@@ -7,6 +7,9 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyr)
+library(tidytext)
 ```
 
 ## Broad Strokes
@@ -21,8 +24,23 @@ Upon completion, the app will be able to take writing as input and return a pred
 
 ```{r readData, message = FALSE}
 download.file('https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip', 'SwiftKey.zip')
+
 unzip('SwiftKey.zip')
+
 tweets <- readLines('final/en_US/en_US.twitter.txt')
 blogs <- readLines('final/en_US/en_US.blogs.txt')
 news <- readLines('final/en_US/en_US.news.txt')
+
+# Find the number of lines in each file
+
+sizes <- c(tweets = length(tweets), blogs = length(blogs), news = length(news))
+sizes
+```
+
+Here, we download the data and take a quick look at the files. We are restricting ourselves to the English text data as our app will be predicting in English.
+
+### Cleaning the Data
+
+```{r cleanData}
+
 ```
