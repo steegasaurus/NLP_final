@@ -1,0 +1,28 @@
+---
+title: "Exploratory Analysis"
+author: "Steeg Pierce"
+date: "7/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Broad Strokes
+
+Data included in the corpora from the class's file include text from Twitter, news articles, and blog entries. We can imagine the varied types of writing coming from these sources; the language used in each format will likely be quite different. Given that, we will be able to predict next words more reliably on more kinds of phrasing.
+
+## Goals
+
+Upon completion, the app will be able to take writing as input and return a prediction of the likeliest next word the author of that text would use. To keep memory usage somewhat trim, we will use a Marcov chain style algorithm with n-gram predictions. In other words, for each prediction, we will only be looking at the 'present' set of n words preceding the prediction rather than the entire set. For training, we will be pulling from the aforementioned datasets. With that in mind, it's worth examining the characteristics of said data.
+
+### Reading the Data
+
+```{r readData, message = FALSE}
+download.file('https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip', 'SwiftKey.zip')
+unzip('SwiftKey.zip')
+tweets <- readLines('final/en_US/en_US.twitter.txt')
+blogs <- readLines('final/en_US/en_US.blogs.txt')
+news <- readLines('final/en_US/en_US.news.txt')
+```
