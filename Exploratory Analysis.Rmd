@@ -78,3 +78,5 @@ hist(log(blog_counts$n), xlab = 'Words in Blogs', main = 'Histogram of Blogs')
 hist(log(news_counts$n), xlab = 'Words in News', main = 'Histogram of News')
 hist(log(sum_counts$n), xlab = 'Words in Combined', main = 'Histogram of All')
 ```
+
+We can immediately see that a few words make up the vast majority of the dataset. This is true for all 3 corpora and it appears that the same words appear in all of them with some frequency given the similar shape of the combined dataframe.
