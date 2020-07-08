@@ -52,7 +52,7 @@ tokenized_news <- tibble(text = news) %>%
   unnest_tokens(word, text)
 ```
 
-Next, we'll take counts of the words
+Next, we'll take counts of the words.
 
 ```{r countWords}
 tweet_counts <- tokenized_tweets %>%
@@ -61,4 +61,20 @@ blog_counts <- tokenized_blogs %>%
   count(word, sort = TRUE)
 news_counts <- tokenized_news %>%
   count(word, sort = TRUE)
+sum_counts <- bind_rows(tweet_counts, blog_counts, news_counts) %>%
+    group_by(word) %>%
+    summarize_all(sum) %>%
+    arrange(desc(n))
+```
+
+### Graphing the Data
+
+We can now use those counts to take a look at word frequencies. Histograms are probably the easiest way to graph the data.
+
+```{r countHistograms, echo = FALSE}
+par(mfrow = c(2, 2))
+hist(log(tweet_counts$n), xlab = 'Words in Tweets', main = 'Histogram of Tweets')
+hist(log(blog_counts$n), xlab = 'Words in Blogs', main = 'Histogram of Blogs')
+hist(log(news_counts$n), xlab = 'Words in News', main = 'Histogram of News')
+hist(log(sum_counts$n), xlab = 'Words in Combined', main = 'Histogram of All')
 ```
