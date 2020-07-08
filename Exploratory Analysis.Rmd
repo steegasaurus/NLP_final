@@ -41,6 +41,24 @@ Here, we download the data and take a quick look at the files. We are restrictin
 
 ### Cleaning the Data
 
-```{r cleanData}
+This code tokenizes the text into words so we can more easily examine it.
 
+```{r tokenizeData}
+tokenized_tweets <- tibble(text = tweets) %>% 
+  unnest_tokens(word, text)
+tokenized_blogs <- tibble(text = blogs) %>%
+  unnest_tokens(word, text)
+tokenized_news <- tibble(text = news) %>%
+  unnest_tokens(word, text)
+```
+
+Next, we'll take counts of the words
+
+```{r countWords}
+tweet_counts <- tokenized_tweets %>%
+  count(word, sort = TRUE)
+blog_counts <- tokenized_blogs %>%
+  count(word, sort = TRUE)
+news_counts <- tokenized_news %>%
+  count(word, sort = TRUE)
 ```
