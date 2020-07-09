@@ -138,3 +138,7 @@ hist(log(trigram_blogs$n), xlab = 'Trigrams in Blogs', main = 'Histogram of Blog
 hist(log(trigram_news$n), xlab = 'Trigrams in News', main = 'Histogram of News')
 hist(log(sum_trigrams$n), xlab = 'Trigrams in Combined', main = 'Histogram of All')
 ```
+
+## Conclusion
+
+The frequency of words and phrases is heavily top-loaded. We can probably train our model without the lowest-frequency words and still achieve a similar level of accuracy. This will make our model leaner and more portable when we turn it into an app. 
