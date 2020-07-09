@@ -81,7 +81,7 @@ hist(log(sum_counts$n), xlab = 'Words in Combined', main = 'Histogram of All')
 
 We can immediately see that a few words make up the vast majority of the dataset. This is true for all 3 corpora and it appears that the same words appear in all of them with some frequency given the similar shape of the combined dataframe.
 
-## Analyzing Bigrams
+## Analyzing n-grams
 
 Here we will take a look at n-grams with an n of 2, or bigrams. It will give us a sense of how words relate to each other in the corpora.
 
@@ -99,4 +99,42 @@ sum_bigrams <- bind_rows(bigram_tweets, bigram_blogs, bigram_news) %>%
     group_by(bigram) %>%
     summarize_all(sum) %>%
     arrange(desc(n))
+```
+
+Once again, we can take a quick look at the most common ones with histograms.
+
+```{r bigramHistograms, echo = FALSE}
+par(mfrow = c(2, 2))
+hist(log(bigram_tweets$n), xlab = 'Bigrams in Tweets', main = 'Histogram of Tweets')
+hist(log(bigram_blogs$n), xlab = 'Bigrams in Blogs', main = 'Histogram of Blogs')
+hist(log(bigram_news$n), xlab = 'Bigrams in News', main = 'Histogram of News')
+hist(log(sum_bigrams$n), xlab = 'Bigrams in Combined', main = 'Histogram of All')
+```
+
+Taking it a bit further, we can do an analysis with an n of 3.
+
+```{r trigramToken}
+trigram_tweets <- tibble(text = tweets) %>% 
+  unnest_tokens(trigram, text, token = 'ngrams', n = 3) %>%
+  count(trigram, sort = TRUE)
+trigram_blogs <- tibble(text = blogs) %>%
+  unnest_tokens(trigram, text, token = 'ngrams', n =3) %>%
+  count(trigram, sort = TRUE)
+trigram_news <- tibble(text = news) %>%
+  unnest_tokens(trigram, text, token = 'ngrams', n = 3) %>%
+  count(trigram, sort = TRUE)
+sum_trigrams <- bind_rows(trigram_tweets, trigram_blogs, trigram_news) %>%
+    group_by(trigram) %>%
+    summarize_all(sum) %>%
+    arrange(desc(n))
+```
+
+Finally, we look at histograms of the 3-grams.
+
+```{r bigramHistograms, echo = FALSE}
+par(mfrow = c(2, 2))
+hist(log(trigram_tweets$n), xlab = 'Trigrams in Tweets', main = 'Histogram of Tweets')
+hist(log(trigram_blogs$n), xlab = 'Trigrams in Blogs', main = 'Histogram of Blogs')
+hist(log(trigram_news$n), xlab = 'Trigrams in News', main = 'Histogram of News')
+hist(log(sum_trigrams$n), xlab = 'Trigrams in Combined', main = 'Histogram of All')
 ```
