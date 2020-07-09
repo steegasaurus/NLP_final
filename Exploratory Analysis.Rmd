@@ -111,34 +111,6 @@ hist(log(bigram_news$n), xlab = 'Bigrams in News', main = 'Histogram of News')
 hist(log(sum_bigrams$n), xlab = 'Bigrams in Combined', main = 'Histogram of All')
 ```
 
-Taking it a bit further, we can do an analysis with an n of 3.
-
-```{r trigramToken}
-trigram_tweets <- tibble(text = tweets) %>% 
-  unnest_tokens(trigram, text, token = 'ngrams', n = 3) %>%
-  count(trigram, sort = TRUE)
-trigram_blogs <- tibble(text = blogs) %>%
-  unnest_tokens(trigram, text, token = 'ngrams', n =3) %>%
-  count(trigram, sort = TRUE)
-trigram_news <- tibble(text = news) %>%
-  unnest_tokens(trigram, text, token = 'ngrams', n = 3) %>%
-  count(trigram, sort = TRUE)
-sum_trigrams <- bind_rows(trigram_tweets, trigram_blogs, trigram_news) %>%
-    group_by(trigram) %>%
-    summarize_all(sum) %>%
-    arrange(desc(n))
-```
-
-Finally, we look at histograms of the 3-grams.
-
-```{r bigramHistograms, echo = FALSE}
-par(mfrow = c(2, 2))
-hist(log(trigram_tweets$n), xlab = 'Trigrams in Tweets', main = 'Histogram of Tweets')
-hist(log(trigram_blogs$n), xlab = 'Trigrams in Blogs', main = 'Histogram of Blogs')
-hist(log(trigram_news$n), xlab = 'Trigrams in News', main = 'Histogram of News')
-hist(log(sum_trigrams$n), xlab = 'Trigrams in Combined', main = 'Histogram of All')
-```
-
 ## Conclusion
 
 The frequency of words and phrases is heavily top-loaded. We can probably train our model without the lowest-frequency words and still achieve a similar level of accuracy. This will make our model leaner and more portable when we turn it into an app. 
