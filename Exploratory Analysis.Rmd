@@ -1,7 +1,7 @@
 ---
 title: "Exploratory Analysis"
 author: "Steeg Pierce"
-date: "7/7/2020"
+date: "7/9/2020"
 output: html_document
 ---
 
@@ -22,7 +22,7 @@ Upon completion, the app will be able to take writing as input and return a pred
 
 ## Reading the Data
 
-```{r readData, message = FALSE}
+```{r readData, message = FALSE, warning = FALSE}
 download.file('https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip', 'SwiftKey.zip')
 
 unzip('SwiftKey.zip')
