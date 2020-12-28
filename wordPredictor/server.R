@@ -22,6 +22,9 @@ shinyServer(function(input, output) {
             unlist
         word1 <- userText[1]
         word2 <- userText[2]
+        if(length(unlist(strsplit(input$Text, split = ' '))) < 2){
+            word2 <- input$Text
+        }
 
         # generate bins based on input$bins from ui.R
         # x    <- faithful[, 2]
