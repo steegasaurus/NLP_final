@@ -18,7 +18,7 @@ shinyUI(fluidPage(
 
         # Show a table of most likely words
         mainPanel(
-            dataTableOutput('prediction')
+            verbatimTextOutput('prediction')
         )
     )
 ))
