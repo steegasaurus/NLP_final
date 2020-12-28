@@ -6,9 +6,8 @@ library(dplyr)
 
 # Define server logic
 shinyServer(function(input, output) {
-
-    output$prediction <- renderDataTable({
-        
+    
+    output$prediction <- renderPrint({
         userText <- input$Text %>%
             tokens(remove_punct = T,
                    remove_symbols = T,
@@ -19,20 +18,15 @@ shinyServer(function(input, output) {
             unlist %>%
             last %>%
             strsplit('_') %>%
-            unlist
+            unlist %>%
+            tolower
         word1 <- userText[1]
         word2 <- userText[2]
         if(length(unlist(strsplit(input$Text, split = ' '))) < 2){
-            word2 <- input$Text
+            word2 <- tolower(input$Text)
         }
-
-        # generate bins based on input$bins from ui.R
-        # x    <- faithful[, 2]
-        #bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        #hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
+        pred <- findWord(word1, word2)
+        print(pred)
     })
 
 })
