@@ -23,6 +23,8 @@ trigrams <- tokens(combined,
 dfModel <- tibble(text = trigrams) %>%
     separate(text, c('a', 'b', 'c'), sep = '_')
 
+save(dfModel, file = 'dfModel.rds')
+
 findWord <- function(word1, word2){
     if(word1 %in% dfModel$a & word2 %in% dfModel$b){
         pred <- dfModel %>%
