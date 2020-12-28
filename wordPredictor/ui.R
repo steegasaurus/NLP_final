@@ -7,17 +7,16 @@ shinyUI(fluidPage(
     # Application title
     titlePanel("Word Prediction Application"),
 
-    # Sidebar with a slider input for number of bins
+    # Sidebar for text input
     sidebarLayout(
         sidebarPanel(
             textInput("Text",
                         label = ('Type here'),
-                        min = 0,
-                        max = 50,
-                        value = 10)
+                        value = ''),
+            submitButton('Submit Text')
         ),
 
-        # Show a plot of the generated distribution
+        # Show a table of most likely words
         mainPanel(
             dataTableOutput('prediction')
         )
