@@ -1,0 +1,12 @@
+name: Predictor
+title: Predictor
+username:
+account: steegasaurus
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3431879
+bundleId: 4034278
+url: https://steegasaurus.shinyapps.io/Predictor/
+when: 1609133453.56517
+asMultiple: FALSE
+asStatic: FALSE
